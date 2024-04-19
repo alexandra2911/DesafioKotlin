@@ -86,19 +86,18 @@ class SmartLightDevice(deviceName: String, deviceCategory: String) :
 }
 
 class SmartHome(
-    val smartTvDevice: SmartTvDevice,
-    val smartLightDevice: SmartLightDevice
+    private val smartTvDevice: SmartTvDevice,
+    private val smartLightDevice: SmartLightDevice
 ) {
 
-    var deviceTurnOnCount = 0
-        private set
+    private var deviceTurnOnCount = 0
 
     fun turnOnTv() {
         deviceTurnOnCount++
         smartTvDevice.turnOn()
     }
 
-    fun turnOffTv() {
+    private fun turnOffTv() {
         if (smartTvDevice.deviceStatus == "on") {
             deviceTurnOnCount--
             smartTvDevice.turnOff()
@@ -130,7 +129,7 @@ class SmartHome(
         smartLightDevice.turnOn()
     }
 
-    fun turnOffLight() {
+    private fun turnOffLight() {
         if (smartLightDevice.deviceStatus == "on") {
             deviceTurnOnCount--
             smartLightDevice.turnOff()
@@ -161,7 +160,7 @@ class RangeRegulator(
     private val maxValue: Int
 ) : ReadWriteProperty<Any?, Int> {
 
-    var fieldData = initialValue
+    private var fieldData = initialValue
 
     override fun getValue(thisRef: Any?, property: KProperty<*>): Int {
         return fieldData
